@@ -1,0 +1,26 @@
+<section>
+    <div class="row">
+        <div class="col lg-5 md-4"><img src="https://picsum.photos/200/300" alt="" class="img-fluid"></div>
+        <div class="col lg-7 md-8">
+            <div>
+                <h1 class="fs-1">Bienvenido de nuevo!</h1>
+                <form [formGroup]="loginForm" (submit)="login()">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passord" class="form-label">Password</label>
+                        <input type="password" formControlName="password" class="form-control" id="passord">
+                    </div>
+                    <div class="mb-3">
+                        <p>Olvidaste tu contraseña?, no te preocupes <a [routerLink]="['/recovery']" routerLinkActive="active">Recuperarla</a> </p>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Login</button> -->
+                    <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary submit-btn btn-block">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
