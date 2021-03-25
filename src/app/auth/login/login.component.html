@@ -7,7 +7,8 @@
                 <form [formGroup]="loginForm" (submit)="login()">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input type="email" formControlName="email" class="form-control" id="email"
+                            aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
@@ -15,12 +16,43 @@
                         <input type="password" formControlName="password" class="form-control" id="passord">
                     </div>
                     <div class="mb-3">
-                        <p>Olvidaste tu contraseña?, no te preocupes <a [routerLink]="['/recovery']" routerLinkActive="active">Recuperarla</a> </p>
+                        <p>Olvidaste tu contraseña?, no te preocupes <a [routerLink]="['/recovery']"
+                                routerLinkActive="active">Recuperarla</a> </p>
                     </div>
                     <!-- <button type="submit" class="btn btn-primary">Login</button> -->
-                    <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary submit-btn btn-block">Login</button>
+                    <button type="submit" [disabled]="loginForm.invalid"
+                        class="btn btn-primary submit-btn btn-block">Login</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+<!-- <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Vertically centered hero sign-up form</h1>
+        <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      </div>
+      <div class="col-10 mx-auto col-lg-5">
+        <form [formGroup]="loginForm" (submit)="login()" class="p-5 border rounded-3 bg-light">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="emailImput" placeholder="name@example.com">
+            <label for="emailImput" formControlName="email">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword" formControlName="password">Password</label>
+          </div>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+          <hr class="my-4">
+          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+        </form>
+      </div>
+    </div>
+  </div> -->

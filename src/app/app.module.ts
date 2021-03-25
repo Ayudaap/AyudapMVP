@@ -7,27 +7,26 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { AngularFireModule } from '@angular/fire';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { AngularFireModule } from '@angular/fire';
-import { AuthModule } from './auth/auth.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { appReducers } from './store/app.reducers';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule,
+    SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AuthModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
