@@ -9,10 +9,14 @@ export class AuthService {
 
   constructor(public auth: AngularFireAuth) { }
 
+  /**
+   * Crea un nuevo usuario
+   * @param nombre Nombre de usuario
+   * @param email 
+   * @param password 
+   * @returns 
+   */
   crearUsuario(nombre: string, email: string, password: string) {
-
-    // Version reactivex
-    // return from(this.auth.createUserWithEmailAndPassword(email, password));
 
     return from(this.auth.createUserWithEmailAndPassword(email, password));
   }
@@ -26,10 +30,10 @@ export class AuthService {
     return from(this.auth.signInWithEmailAndPassword(email, password));
   }
 
-   /**
-   * Cerrar sesion
-   */
-    logOut() {
-      return this.auth.signOut();
-    }
+  /**
+  * Cerrar sesion
+  */
+  logOut() {
+    return this.auth.signOut();
+  }
 }

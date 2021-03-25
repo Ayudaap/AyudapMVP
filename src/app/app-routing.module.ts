@@ -10,7 +10,7 @@ const routes: Routes = [
     loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'login',
+    path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   { path: 'recovery', component: RecoveryPassComponent, pathMatch: 'full' },

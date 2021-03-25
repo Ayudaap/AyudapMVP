@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as uiActions from '../actions/ui.actions';
+import * as uiActions from '../actions/index';
 
 
 export interface State {

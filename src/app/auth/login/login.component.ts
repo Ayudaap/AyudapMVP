@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as uiActions from '../../store/actions/ui.actions';
-import { AppState } from 'src/app/store/app.reducers';
+import { AppState } from 'src/app/app.reducers';
+import * as uiActions from '../../core/store/actions/index'
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -14,12 +14,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private store:Store<AppState>, private frm:FormBuilder, private authServices:AuthService) { }
+  constructor(private store: Store<AppState>, private frm: FormBuilder, private authServices: AuthService) { }
 
 
   ngOnInit(): void {
     this.loginForm = this.frm.group({
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.min(8)]]
     });
 

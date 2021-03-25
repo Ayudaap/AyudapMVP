@@ -13,8 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { appReducers } from './store/app.reducers';
 import { SharedModule } from './shared/shared.module';
+import { appReducers } from './app.reducers';
+
 
 @NgModule({
   declarations: [

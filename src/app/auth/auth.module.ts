@@ -5,11 +5,12 @@ import { LoginComponent } from './login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecoveryPassComponent } from './recovery-pass/recovery-pass.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, RecoveryPassComponent],
+  declarations: [LoginComponent, RecoveryPassComponent, RegisterComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
