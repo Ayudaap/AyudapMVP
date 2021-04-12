@@ -61,8 +61,26 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (!this.formControl.valid) { return; }
     this.store.dispatch(uiActions.isLoading());
     
-    console.log(this.formControl.value);
+    const {email, password,username} = this.formControl.value;
     
+    this.auth.crearUsuario(username, email, password).subscribe({
+      next: (data)=>{
+        Swal.fire({
+          title: 'Exito',
+          icon: 'success',
+          text: 'Usuario creado con éxito'
+        });
+      },
+      error: ({ message }) => {
+        Swal.fire({
+          title: 'Oops',
+          icon: 'error',
+          text: message
+        });
+      },
+      complete: () => Swal.close()
+    });
+
     this.store.dispatch(uiActions.stopLoading());
   }
 

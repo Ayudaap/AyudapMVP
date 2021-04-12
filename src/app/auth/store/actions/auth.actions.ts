@@ -9,7 +9,6 @@ export const setUser = createAction(
   props<{ user: Usuario }>()
 );
 
-
 /**
  * Desasigna un usuario
  */
