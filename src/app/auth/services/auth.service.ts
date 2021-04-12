@@ -1,16 +1,40 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { from } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { from, Subscription } from 'rxjs';
 import { map, tap } from "rxjs/operators";
+import { AppState } from 'src/app/app.reducers';
 import { Usuario } from '../../models/usuario.model';
+import * as authActions from "../store/actions/index";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(public auth: AngularFireAuth, private firestore: AngularFirestore) { }
+  userSubscription: Subscription;
+  private _user: Usuario;
+
+  public get user(): Usuario { return { ...this._user } }
+
+  constructor(private store: Store<AppState>, public auth: AngularFireAuth, private firestore: AngularFirestore) { }
+
+  initAuthlistener() {
+    return this.auth.authState.subscribe(fuser => {
+      if (fuser) {
+        this.userSubscription = this.firestore.doc(`${fuser.uid}/usuario`).valueChanges().subscribe((firestoreUser: any) => {
+          const user = Usuario.fromFirebase(firestoreUser);
+          this._user = user;
+          this.store.dispatch(authActions.setUser({ user }));
+        });
+      } else {
+        this._user = null;
+        this.userSubscription?.unsubscribe();
+        this.store.dispatch(authActions.unsetUset());
+      }
+    });
+  }
 
   /**
    * Crea un nuevo usuario
@@ -43,5 +67,15 @@ export class AuthService {
   */
   logOut() {
     return this.auth.signOut();
+  }
+
+  /**
+   * 
+   * @returns Indica si el usuario esta autenticado
+   */
+  isAuth() {
+    return this.auth.authState.pipe(
+      map(user => user != null)
+    );
   }
 }

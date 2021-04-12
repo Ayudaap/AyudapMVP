@@ -1,12 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2'
+
 import { AppState } from 'src/app/app.reducers';
 import { AuthService } from '../services/auth.service';
 import { Usuario } from '../../models/usuario.model';
-import { Subscription } from 'rxjs';
 import * as uiActions from '../../core/store/actions/index';
-import Swal from 'sweetalert2'
+import * as authActions from '../store/actions';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +25,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   user: Usuario;
   loading: boolean = false;
 
-  constructor(private store: Store<AppState>, private frm: FormBuilder, private authServices: AuthService) { }
+  constructor(
+    private store: Store<AppState>,
+    private frm: FormBuilder,
+    private router: Router,
+    private authServices: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.frm.group({
@@ -46,12 +53,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     const { email, password } = this.loginForm.value;
     this.authServices.loginUsuario(email, password).subscribe({
       next: (usuario) => {
-        console.log(usuario);
         Swal.fire({
           title: 'Login Exitoso!',
           icon: 'success',
           text: 'Bienvenido'
         });
+        this.router.navigate(['proyectos']);
+
+        //TODO: Cambiar por el usuario almacenado en BD Firestore
+        const usuarioApp = new Usuario(usuario.user.uid, usuario.user.displayName, email);
+        this.store.dispatch(authActions.setUser({ user: usuarioApp }))
+        
+        //TODO: Cargar proyectos del usuario
       },
       error: (err) => {
         Swal.fire({

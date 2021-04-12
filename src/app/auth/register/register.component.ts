@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import * as uiActions from '../../core/store/actions/index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     private frm: FormBuilder,
+    private router: Router,
     private auth: AuthService) { }
 
 
@@ -70,6 +72,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           icon: 'success',
           text: 'Usuario creado con éxito'
         });
+        this.router.navigate(['proyectos']);
       },
       error: ({ message }) => {
         Swal.fire({
