@@ -15,9 +15,9 @@
                     <a class="nav-link" routerLinkActive="active" routerLink="auth">Login</a>
                 </li>
                 <li class="nav-item" *ngIf="usuario">
-                    <a class="nav-link" routerLinkActive="active" (click)="loguth()">Logout</a>
+                    <a class="nav-link" routerLinkActive="active" (click)="loguth()" href="#">Logout</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!usuario">
                     <a class="nav-link" routerLinkActive="active" routerLink="auth/register">Registro</a>
                 </li>
             </ul>

@@ -70,6 +70,15 @@ export class AuthService {
   }
 
   /**
+   * Recovery Password
+   * @returns 
+   */
+  recoveryPassword(email: string) {
+    console.log({ email });
+    return from(this.auth.sendPasswordResetEmail(email));
+  }
+
+  /**
    * 
    * @returns Indica si el usuario esta autenticado
    */
